@@ -43,6 +43,10 @@ spring:
     type: ehcache
     ehcache:
       config: classpath:ehcache.xml
+  data:
+    redis:
+      repositories:
+        enabled: false
   redis:
     database: 0
     host: 148.70.173.241
@@ -56,6 +60,8 @@ spring:
         max-idle: 10
         min-idle: 2
 
+############################################################
+
 server:
   port: 10001
   tomcat:
@@ -64,6 +70,8 @@ logging:
   level:
     root: info
   path: ../log/
+
+#############################################################
 
 jianzhi:
   base:
