@@ -4,9 +4,9 @@ spring:
   application:
     name: learn_ehcache_with_hibernate
   datasource:
-    url: jdbc:mysql://localhost:3306/DbTest?useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
-    username: root
-    password: NumbMen221@love!
+    url: jdbc:mysql://148.70.173.241:3306/db_dev?useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: jianzhi@2019
+    password: fzJZ@18-19!
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 1
@@ -45,10 +45,10 @@ spring:
       config: classpath:ehcache.xml
   redis:
     database: 0
-    host: 127.0.0.1
+    host: 148.70.173.241
     port: 6379
     timeout: 0
-    password:
+    password: fzJZ@redis1323
     jedis:
       pool:
         max-active: 1000
@@ -65,7 +65,7 @@ logging:
     root: info
   path: ../log/
 
-hengyumo:
+jianzhi:
   base:
     system:
       admin:
@@ -74,3 +74,5 @@ hengyumo:
   wx:
     appId: wxa893838fe64bd72c
     appSecret: f5157912906d57b2d14178012b1817a6
+  resource:
+    scan: com.fzjianzhi.jianzhi
