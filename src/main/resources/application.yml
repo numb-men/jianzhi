@@ -84,3 +84,5 @@ jianzhi:
     appSecret: f5157912906d57b2d14178012b1817a6
   resource:
     scan: com.fzjianzhi.jianzhi
+  dict:
+    scan: com.fzjianzhi.jianzhi

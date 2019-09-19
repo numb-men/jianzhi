@@ -1,6 +1,8 @@
 package com.fzjianzhi.jianzhi.b2c.entity;
 
 import com.fzjianzhi.jianzhi.base.mvc.BaseEntity;
+import com.fzjianzhi.jianzhi.base.system.config.SystemDict;
+import com.fzjianzhi.jianzhi.base.system.config.UseSystemDict;
 import com.fzjianzhi.jianzhi.wx.user.WxUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -20,6 +22,7 @@ import javax.persistence.OneToOne;
  */
 
 @Data
+@UseSystemDict
 @Entity(name = "tb_b2c_base_user")
 @EqualsAndHashCode(callSuper = true)
 public class B2cBaseUser extends BaseEntity<Long> {
@@ -40,6 +43,8 @@ public class B2cBaseUser extends BaseEntity<Long> {
 
     private Boolean todaySignIn;
 
+    @SystemDict(name = "sex")
+    private Integer sex;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wx_user_id", referencedColumnName = "id")

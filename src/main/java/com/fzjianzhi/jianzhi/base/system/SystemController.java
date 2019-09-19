@@ -37,4 +37,13 @@ public class SystemController {
         systemService.createResources(request);
         return Result.success();
     }
+
+
+    @SystemAdminAuth
+    @GetMapping("/dict/create")
+    @SystemResource(name = "systemDictCreate", comment = "生成系统字典", code = "system.dict.create")
+    public Result createDict() {
+        systemService.createDict();
+        return Result.success();
+    }
 }

@@ -1,11 +1,14 @@
 package com.fzjianzhi.jianzhi.wx.user;
 
 
+import com.fzjianzhi.jianzhi.b2c.entity.B2cBaseUser;
 import com.fzjianzhi.jianzhi.base.mvc.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -45,4 +48,6 @@ public class WxUser extends BaseEntity<Long> {
     @NotBlank
     private String province;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private B2cBaseUser b2cBaseUser;
 }

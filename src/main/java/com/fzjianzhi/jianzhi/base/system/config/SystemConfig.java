@@ -20,4 +20,7 @@ public interface SystemConfig {
     SystemResourceType DEFAULT_RESOURCE_TYPE = SystemResourceType.DEFAULT;
     String DEFAULT_RESOURCE_CODE_PREFIX = "default";
     Long DEFAULT_RESOURCE_ORDER_BY = 0L;
+
+    String DEFAULT_DICT_ICON = "default-icon";
+    String DEFAULT_DICT_ITEM_ICON = "default-icon";
 }
