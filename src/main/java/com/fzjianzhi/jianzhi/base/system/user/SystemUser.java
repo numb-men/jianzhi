@@ -51,7 +51,6 @@ public class SystemUser extends BaseEntity<Long> {
     public String toString() {
         return "SystemUser{" +
                 "name='" + name + '\'' +
-                ", password='" + password + '\'' +
                 ", id=" + id +
                 '}';
     }

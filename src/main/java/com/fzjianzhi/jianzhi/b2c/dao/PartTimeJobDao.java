@@ -4,8 +4,6 @@ import com.fzjianzhi.jianzhi.b2c.entity.PartTimeJob;
 import com.fzjianzhi.jianzhi.base.mvc.BaseDao;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * PartTimeJobDao
  *

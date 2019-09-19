@@ -27,6 +27,7 @@ public class SystemService implements SystemConfig {
     @Resource
     private SystemDictService systemDictService;
 
+
     public void createResources(HttpServletRequest request) {
         systemResourceService.createResources(request);
     }

@@ -28,7 +28,9 @@ public enum BaseResultEnum implements ResultEnum {
     PASSWORD_ERROR(1008, "密码错误"),
     NOT_GOOD_PASSWORD(1009, "密码应由8-12位数字和字母组成"),
     PASSWORD_EQUAL(1010, "新密码和旧密码相同，不改变"),
-    SET_AUDITOR_FAIL(1011, "设置用户失败")
+    SET_AUDITOR_FAIL(1011, "设置用户失败"),
+
+    UN_MAPPING_JSON(704, "无法映射的JSON"),
     ;
 
     private Integer code;

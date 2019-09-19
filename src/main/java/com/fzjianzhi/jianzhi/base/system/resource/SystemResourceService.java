@@ -49,13 +49,12 @@ public class SystemResourceService extends BaseService<SystemResourceEntity, Lon
 
     private Map<RequestMappingInfo, HandlerMethod> mappingMethodMap;
 
-    private List<Class<?>> parentClassSet;
+    private List<Class<?>> parentClasses;
 
     private int defaultSystemResourceNum;
 
-    @Value("${jianzhi.resource.scan}")
+    @Value("${humor.resource.scan}")
     private String basePackageScan;
-
 
     @Cacheable(cacheNames = "cache", key = "#root.method.returnType")
     public List<SystemResourceEntity> getSystemResourceEntities() {
@@ -64,9 +63,9 @@ public class SystemResourceService extends BaseService<SystemResourceEntity, Lon
 
     // 生成资源
     public void createResources(HttpServletRequest request) {
-        parentClassSet = getControllerClass();
-        if (parentClassSet.size() == 0) {
-            log.warn("controller class not found ");
+        parentClasses = getControllerClass();
+        if (parentClasses.size() == 0) {
+            log.warn("controller class not found");
         }
         saveClassResource();
         ServletContext servletContext = request.getSession().getServletContext();
@@ -79,7 +78,7 @@ public class SystemResourceService extends BaseService<SystemResourceEntity, Lon
 
     // 保存SystemResourceClass的系统资源
     private void saveClassResource() {
-        for (Class parentClass : parentClassSet) {
+        for (Class parentClass : parentClasses) {
             SystemResourceClass systemResourceClass =
                     (SystemResourceClass) parentClass.getAnnotation(SystemResourceClass.class);
             if (systemResourceClass != null) {
@@ -115,7 +114,7 @@ public class SystemResourceService extends BaseService<SystemResourceEntity, Lon
     // 遍历类，生成资源
     private void traverseClass() {
         defaultSystemResourceNum = 0;
-        for (Class parentClass : parentClassSet) {
+        for (Class parentClass : parentClasses) {
             Set<Method> methods = getClassMethod(parentClass);
             for (Method method : methods) {
                 Map.Entry<RequestMappingInfo, HandlerMethod> entry = isMappingMethod(method, parentClass);

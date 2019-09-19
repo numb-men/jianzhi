@@ -17,10 +17,18 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @EnableConfigurationProperties(SystemAdmin.class)
-@ConfigurationProperties(prefix = "jianzhi.base.system.admin")
+@ConfigurationProperties(prefix = "humor.base.system.admin")
 public class SystemAdmin {
 
     private final Long id = 0L;
     private String name;
     private String password;
+
+    @Override
+    public String toString() {
+        return "SystemAdmin{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

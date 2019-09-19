@@ -8,8 +8,10 @@ import com.fzjianzhi.jianzhi.base.system.config.UseSystemDict;
 import com.fzjianzhi.jianzhi.base.utils.ClassUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
 @Slf4j
 public class SystemDictService extends BaseService<SystemDictEntity, Long> implements SystemConfig {
 
-    @Value("${jianzhi.dict.scan}")
+    @Value("${humor.dict.scan}")
     private String basePackageScan;
 
     private List<Class<?>> dataClasses;
@@ -34,6 +36,14 @@ public class SystemDictService extends BaseService<SystemDictEntity, Long> imple
 
     private List<SystemDictEntity> systemDictEntityList;
 
+    @Resource
+    private SystemDictDao systemDictDao;
+
+
+    @Cacheable(cacheNames = "cache", key = "#root.method.returnType + '_' + #name")
+    public SystemDictEntity findByName(String name) {
+        return systemDictDao.findByName(name);
+    }
 
     public void createDict() {
         dataClasses = getDataClass();

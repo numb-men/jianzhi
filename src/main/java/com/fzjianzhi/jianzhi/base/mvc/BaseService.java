@@ -1,5 +1,6 @@
 package com.fzjianzhi.jianzhi.base.mvc;
 
+import com.fzjianzhi.jianzhi.base.utils.CopyUtil;
 import com.github.wenhao.jpa.Specifications;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,15 +26,10 @@ import java.util.Optional;
 @Slf4j
 public class BaseService<T extends BaseEntity<ID>, ID extends Serializable> {
 
-
-
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     protected BaseDao<T, ID> baseDao;
-    
-    public void save(T entity) {
-        baseDao.save(entity);
-    }
+
 
     public void delete(ID id) {
         baseDao.deleteById(id);
@@ -79,5 +76,20 @@ public class BaseService<T extends BaseEntity<ID>, ID extends Serializable> {
         Specification<T> specification = Specifications.<T>and()
                 .eq("isDeleted", false).build();
         return baseDao.count(specification);
+    }
+
+    @Transactional
+    public void save(T entity) {
+        if (entity.getId() != null) {
+            T oldEntity = findOne(entity.getId()).orElse(null);
+            if (oldEntity != null) {
+                // update not null properties
+                CopyUtil.copyNullProperties(oldEntity, entity);
+                baseDao.save(entity);
+                return;
+            }
+        }
+        // create
+        baseDao.save(entity);
     }
 }

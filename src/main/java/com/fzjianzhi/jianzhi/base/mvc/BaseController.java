@@ -59,14 +59,14 @@ public class BaseController<S extends BaseService<T, ID>, T extends BaseEntity<I
 
     @SystemUserAuth
     @PostMapping("/")
-    public Result addOne(@Valid T entity) {
+    public Result addOne(@Valid @RequestBody T entity) {
         baseService.save(entity);
         return Result.success();
     }
 
     @SystemUserAuth
     @PutMapping("/{id}")
-    public Result updateOne(@Valid T entity, @PathVariable ID id) {
+    public Result updateOne(@Valid @RequestBody T entity, @PathVariable ID id) {
         entity.setId(id);
         baseService.save(entity);
         return Result.success();
@@ -74,7 +74,7 @@ public class BaseController<S extends BaseService<T, ID>, T extends BaseEntity<I
 
     @SystemUserAuth
     @PutMapping("/")
-    public Result updateOneById(@Valid T entity, @RequestParam ID id) {
+    public Result updateOneById(@Valid @RequestBody T entity, @RequestParam ID id) {
         entity.setId(id);
         baseService.save(entity);
         return Result.success();

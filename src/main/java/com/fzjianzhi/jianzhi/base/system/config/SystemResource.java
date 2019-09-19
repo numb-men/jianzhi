@@ -20,7 +20,7 @@ public @interface SystemResource {
     String parentCode() default "";
     String name() default "";
     String icon() default "";
-    String comment();
+    String comment() default "";
     SystemResourceType type() default SystemResourceType.BUTTON;
     String code() default "";
 }

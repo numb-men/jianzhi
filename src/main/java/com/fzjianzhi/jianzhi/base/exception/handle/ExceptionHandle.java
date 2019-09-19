@@ -8,6 +8,7 @@ import com.fzjianzhi.jianzhi.base.result.Result;
 import com.fzjianzhi.jianzhi.base.result.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -45,18 +46,25 @@ public class ExceptionHandle {
             BaseException baseException = (BaseException) e;
             return error(baseException.getResultEnum());
         }
-        else if(e instanceof MissingServletRequestParameterException){
+        else if (e instanceof MissingServletRequestParameterException){
             // 缺少参数
             return error(BaseRequest.MISSING_PARAM, e.getMessage());
         }
-        else if(e instanceof MissingServletRequestPartException) {
+        else if (e instanceof MissingServletRequestPartException) {
             // 缺少参数
             return error(BaseRequest.MISSING_REQUEST_PART, e.getMessage());
         }
-        else if(e instanceof ConstraintViolationException){
+        else if (e instanceof HttpMessageNotReadableException) {
+            // json字典解析错误
+            HttpMessageNotReadableException httpMessageNotReadableException = (HttpMessageNotReadableException) e;
+            return error(BaseResultEnum.UN_MAPPING_JSON.getCode(),
+                    BaseResultEnum.UN_MAPPING_JSON.getMessage());
+        }
+        else if (e instanceof ConstraintViolationException){
             // 表单验证不通过
             ConstraintViolationException constraintViolationException = (ConstraintViolationException) e;
-            Set<ConstraintViolation<?>> constraintViolations = constraintViolationException.getConstraintViolations();
+            Set<ConstraintViolation<?>> constraintViolations
+                    = constraintViolationException.getConstraintViolations();
             Iterator<ConstraintViolation<?>> iterator = constraintViolations.iterator();
             StringBuilder messages = new StringBuilder();
             while (iterator.hasNext()) {
@@ -66,7 +74,7 @@ public class ExceptionHandle {
 
             return error(BaseRequest.PARAM_VALIDATE_FAIL, messages.toString());
         }
-        else if(e instanceof BindException){
+        else if (e instanceof BindException){
             // @Valid表单验证不通过
             BindException bindException = (BindException)e;
             List<ObjectError> errors = bindException.getAllErrors();

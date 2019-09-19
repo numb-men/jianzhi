@@ -1,6 +1,5 @@
 package com.fzjianzhi.jianzhi.base.system.dict;
 
-
 import com.fzjianzhi.jianzhi.base.mvc.BaseDao;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SystemDictDao extends BaseDao<SystemDictEntity, Long> {
+
+    SystemDictEntity findByName(String name);
 }

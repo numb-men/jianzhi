@@ -46,6 +46,7 @@ public class B2cBaseUser extends BaseEntity<Long> {
     @SystemDict(name = "sex")
     private Integer sex;
 
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wx_user_id", referencedColumnName = "id")
     private WxUser wxUser;

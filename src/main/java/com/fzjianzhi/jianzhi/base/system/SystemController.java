@@ -6,6 +6,7 @@ import com.fzjianzhi.jianzhi.base.result.Result;
 import com.fzjianzhi.jianzhi.base.system.config.SystemConfig;
 import com.fzjianzhi.jianzhi.base.system.config.SystemResource;
 import com.fzjianzhi.jianzhi.base.system.config.SystemResourceClass;
+import com.fzjianzhi.jianzhi.base.system.dict.SystemDictService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,6 @@ public class SystemController {
         systemService.createResources(request);
         return Result.success();
     }
-
 
     @SystemAdminAuth
     @GetMapping("/dict/create")

@@ -1,8 +1,7 @@
 package com.fzjianzhi.jianzhi.base.system.dict;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fzjianzhi.jianzhi.base.mvc.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,6 +16,7 @@ import java.util.List;
  * @since 2019/9/18
  */
 @Data
+@Cacheable
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "tb_system_dict")
 public class SystemDictEntity extends BaseEntity<Long> {
@@ -26,7 +26,7 @@ public class SystemDictEntity extends BaseEntity<Long> {
     private String dictIcon;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "tb_system_dict_dict_item", joinColumns = @JoinColumn(name = "system_dict_id"),
             inverseJoinColumns = @JoinColumn(name = "system_dict_item_id"))
     private List<SystemDictItemEntity> items;

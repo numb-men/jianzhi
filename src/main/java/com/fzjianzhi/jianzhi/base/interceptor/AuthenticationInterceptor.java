@@ -69,6 +69,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             token = (String) httpServletRequest.getAttribute("token");
         }
 
+        // todo file、page resource auth
         if (! (object instanceof HandlerMethod)) {
             tryGetUser(token);
             return true;

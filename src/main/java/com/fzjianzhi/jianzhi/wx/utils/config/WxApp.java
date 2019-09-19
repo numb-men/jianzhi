@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @EnableConfigurationProperties(WxApp.class)
-@ConfigurationProperties(prefix = "jianzhi.wx")
+@ConfigurationProperties(prefix = "humor.wx")
 public class WxApp {
 
     private String appId;

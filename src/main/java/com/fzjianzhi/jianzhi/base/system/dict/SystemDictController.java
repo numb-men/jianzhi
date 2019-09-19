@@ -1,6 +1,5 @@
 package com.fzjianzhi.jianzhi.base.system.dict;
 
-
 import com.fzjianzhi.jianzhi.base.mvc.BaseController;
 import com.fzjianzhi.jianzhi.base.system.config.SystemResourceClass;
 import org.springframework.web.bind.annotation.RequestMapping;

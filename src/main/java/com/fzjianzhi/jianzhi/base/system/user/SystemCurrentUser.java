@@ -30,4 +30,13 @@ public class SystemCurrentUser {
         this.name = systemAdmin.getName();
         this.password = systemAdmin.getPassword();
     }
+
+    @Override
+    public String toString() {
+        return "SystemCurrentUser{" +
+                "id=" + id +
+                ", isAdmin=" + isAdmin +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
